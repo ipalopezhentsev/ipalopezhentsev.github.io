@@ -10,7 +10,7 @@ title:            Java and C# Programming musings
 tagline:          Ilya Palopezhentsev
 url:              http://ipalopezhentsev.github.io
 paginate:         10
-baseurl:          /
+baseurl:          http://ipalopezhentsev.github.io
 author:
   name:           Ilya Palopezhentsev
   #url:            https://twitter.com/mdo
