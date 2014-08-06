@@ -6,17 +6,22 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            Poole
-tagline:          The Jekyll Butler
-url:              http://getpoole.com
-paginate:         1
+title:            Java and C# Programming musings
+tagline:          Ilya Palopezhentsev
+url:              http://ipalopezhentsev.github.io
+paginate:         10
 baseurl:          /
 author:
-  name:           Mark Otto
-  url:            https://twitter.com/mdo
-  email:          markdotto@gmail.com
+  name:           Ilya Palopezhentsev
+  #url:            https://twitter.com/mdo
+  email:          iliks@mail.ru
 
 # Custom vars
 version:          1.0.0
 github:
-  repo:           https://github.com/poole/poole
+  repo:           https://github.com/ipalopezhentsev
+
+pages_list:       
+  About: '/about'
+#  Archive: '/archive'
+  Feed: '/atom.xml'
