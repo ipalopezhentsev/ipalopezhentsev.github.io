@@ -1,22 +1,14 @@
 ---
 layout: post
-title:  "Slow handling of CLOB data in Oracle/JDBC"
-date:   2014-08-06 15:54:38
-categories: java jdbc
+title:  "Welcome to Jekyll!"
+date:   2014-08-06 16:51:19
+categories: jekyll update
 ---
 
-{% highlight java %}
-@Test
-public void testMemoryUsage() {
-    final int n = 300_000_000;
-    int[] arr = new int[n];
-    for (int i = 0; i < n; i++) {
-        arr[i] = i;
-    }
-    Integer sum = Arrays.stream(arr).reduce(0, Integer::sum);
-    System.out.println(sum);
-}
-{% endhighlight %}
+You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!
+To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.
+
+Jekyll also offers powerful support for code snippets:
 
 {% highlight ruby %}
 def print_hi(name)
