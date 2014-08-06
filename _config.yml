@@ -1,0 +1,12 @@
+# Site settings
+title: Ilya Palopezhentsev programming blog
+email: iliks@mail.ru
+description: "Just general musings on Java and C#"
+baseurl: ""
+url: "http://yourdomain.com"
+#twitter_username: jekyllrb
+github_username:  ipalopezhentsev
+
+# Build settings
+markdown: kramdown
+permalink: pretty
