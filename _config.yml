@@ -1,6 +1,6 @@
 # Dependencies
 markdown:         redcarpet
-pygments:         true
+highlighter:      pygments
 
 # Permalinks
 permalink:        pretty
@@ -8,9 +8,10 @@ permalink:        pretty
 # Setup
 title:            Java and C# Programming musings
 tagline:          Ilya Palopezhentsev
+#url:              http://ipalopezhentsev.github.io
 url:              http://ipalopezhentsev.github.io
 paginate:         10
-baseurl:          http://ipalopezhentsev.github.io
+baseurl:          /
 author:
   name:           Ilya Palopezhentsev
   #url:            https://twitter.com/mdo
