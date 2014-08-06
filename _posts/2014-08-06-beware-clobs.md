@@ -77,5 +77,5 @@ So Java code would have to read Type column and then either read from StringValu
 
 I used Java 8, Oracle 11 and native Oracle JDBC driver.
 
-# Summary
+## Summary
 Always treat CLOB columns as special case. They are very ineffective for reading (well, probably just for everything).
