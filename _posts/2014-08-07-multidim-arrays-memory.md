@@ -4,7 +4,7 @@ title: Optimising Java multidimensional arrays memory usage
 date: 2014-08-07 00:02
 categories: java C# memory
 ---
-Recently, our team had to use COM interop from Java. We chose [COM4J](https://github.com/kohsuke/com4j) library. Unfortunately, it did not support multidimensional SAFEARRAY's that were used in interfaces of our COM components. A colleague of mine implemented this support in COM4J and we observed one funny and edifying case I want to describe. 
+Recently, our team had to use COM interop from Java. We chose [COM4J](https://github.com/kohsuke/com4j) library. Unfortunately, it did not support multidimensional SAFEARRAY's that were used in interfaces of our COM components. A colleague of mine implemented this support in COM4J and we observed one funny and edifying case I want to describe.
 
 *The content that follows is Java specific, no knowledge of COM is required.*
 
@@ -14,7 +14,7 @@ ParamName|ParamValue
 ---------|----------
 Param1	 | Value1
 Param2	 | Value2
-...		 | ...
+...		   | ...
 
 So it's like dictionary, first column stores names of parameters, second stores values. There are always two columns and arbitrary (often quite large) number of parameter names (rows). Each such matrix represents one business object and there were hundred thousands of them in our app.
 
@@ -53,13 +53,13 @@ for (int i=0;i<nRows;i++) {
 So let's get back to my original transpoed and non-transposed Java arrays.
 
 ### Case 1. Many rows, few columns
-In first case I had 
+In first case I had
 
 ```java
 Object[1000][2]
 ```
 
-Effectively these are 1000 arrays of size 2 each. 
+Effectively these are 1000 arrays of size 2 each.
 Object[2] takes (without sizes of actual Objects stored inside the array):
 
 * 4 bytes for length
@@ -72,7 +72,7 @@ Now take into account array of first dimension, [1000]:
 
 * 4 bytes for length
 * 8 bytes for JVM structures
-* array of 1000 4-byte pointers to lower-dimension arrays that are described above 
+* array of 1000 4-byte pointers to lower-dimension arrays that are described above
 * We have size (4 + 8 + 1000*4)=4 012 so far. It's all padded to 4 016 to align on 8 bytes boundary.
 
 So total is 24 000 + 4 016 = 28 016 bytes.
@@ -94,7 +94,7 @@ Let's see why it is more memory effective:
 So total is 8 032 + 24 = 8 056 bytes.
 
 *That is 28 016 / 8 056 ~ 3.48x memory efficiency just by storing transposed matrix!*
-The more non-square your matrix is, the higher the ratio will be.
+The more non-square your matrix is, the higher the ratio will be. Note this does not take into account size taken by Object's that are in the matrix, if we do account for them, the ration will be less impressive, but still pronounced.
 
 ## How is it in C#?
 

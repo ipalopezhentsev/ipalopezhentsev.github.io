@@ -10,7 +10,7 @@ First I made a slight but non-obvious error in database reading code and as resu
 
 What was so foolish that would slow down database reading this way?
 
-*It was CLOB's reading*. 
+*It was CLOB's reading*.
 
 Let me explain. One table I'm reading from stores values in so-called [Entity-Attribute-Value model](http://en.wikipedia.org/wiki/Entity–attribute–value_model). That is, instead of storing properties of one entity as type-safe columns inside one row in database table, you instead break down that information to several rows, each row having 'name of column', 'type of column' and 'value of column' columns. It is a common pattern and has its pros and cons which we are not interested in right now - I did not have control over database schema.
 
@@ -32,9 +32,9 @@ I had to work with modification of such storage approach, when there were severa
 
   ID | ParamName | Type      | IntValue | StringValue | *CLOBValue*
 :---:|-----------|-----------|----------|-------------|-------------
-  1  | "Param1"  | "INTEGER" |   123	| NULL		  | NULL
-  1  | "Param2"  | "STRING"  |   NULL   | "Test"	  | NULL
-  1  | "Param3"  | "CLOB"    |   NULL	| NULL 		  | "Long CLOB field"
+  1  | "Param1"  | "INTEGER" |   123	  | NULL	  	  | NULL
+  1  | "Param2"  | "STRING"  |   NULL   | "Test"	    | NULL
+  1  | "Param3"  | "CLOB"    |   NULL	  | NULL 		    | "Long CLOB field"
 
 I had to write JDBC code that reads info from that table. I decided to condense all that value fields into one string field on the SQL side in order to save on network transfer volume. As I had Type column, I would have all the info on client to parse string value. As common denominator in this example is CLOB column, I decided to convert everything to CLOB before sending to client. I realised it would bring some non-optimality like 10-20% but I definitely did not expect it to be _120x_!
 
@@ -43,11 +43,11 @@ Here's the SQL query I was using:
 ```sql
 SELECT  ID, ParamName, Type,
 		CASE
-			WHEN Type='INTEGER' 
+			WHEN Type='INTEGER'
 				THEN TO_CLOB(CAST(IntValue AS VARCHAR))
-			WHEN Type='STRING' 
+			WHEN Type='STRING'
 				THEN TO_CLOB(StringValue)
-			WHEN Type='CLOB' 
+			WHEN Type='CLOB'
 				THEN CLOBValue
 		END AS Value
 FROM TABLE t
@@ -59,18 +59,18 @@ It was abysmally slow. It seems CLOB values are very heavyweight and should real
 ```sql
 SELECT  ID, ParamName, Type,
 		CASE
-			WHEN Type='INTEGER' 
+			WHEN Type='INTEGER'
 				THEN CAST(IntValue AS VARCHAR)
-			WHEN Type='STRING' 
+			WHEN Type='STRING'
 				THEN StringValue
-			WHEN Type='CLOB' 
+			WHEN Type='CLOB'
 				THEN NULL
 		END AS StringValue,
 		CASE
-			WHEN Type='CLOB' 
+			WHEN Type='CLOB'
 				THEN CLOBValue
 			ELSE NULL
-		END AS CLOBValue,		
+		END AS CLOBValue,
 FROM TABLE t
 ```
 So Java code would have to read Type column and then either read from StringValue or from CLOBValue column. This allowed to hide rare cases of CLOBs and improve overall reading speed by 120 times.
