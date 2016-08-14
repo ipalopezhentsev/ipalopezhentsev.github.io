@@ -1,0 +1,7 @@
+body {
+    background-color: rgba(0,0,0,255);
+}
+
+canvas {
+    border: thin #ffffff solid;
+}

@@ -5,7 +5,7 @@
  */
 var CANVAS_WIDTH = 0;
 var CANVAS_HEIGHT = 0;
-const NUM_RANDOM_PARTICLES = 30000|0;
+const NUM_RANDOM_PARTICLES = 5000|0;
 const TWO_PI = Math.PI * 2.0;
 const MAX_SPEED = 100.0; //pixels per second
 const TEXT_BRIGHTNESS_THRESHOLD = 450|0;

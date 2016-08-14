@@ -119,22 +119,22 @@ function ImageParticleSystem() {
     };
 
     this.drawParticles = function (backBuffer) {
-        var lenPropsRaw = nParticles * NUM_PARTICLE_PROPERTIES_IMAGE;
+        "use asm";
+        var lenPropsRaw = (nParticles * NUM_PARTICLE_PROPERTIES_IMAGE) | 0;
         var outData = backBuffer.data;
-        for (var idxPropsRaw = 0, idxColorRaw = 0; idxPropsRaw < lenPropsRaw;) {
-            var x = Math.round(particlesProps[idxPropsRaw++]);
-            var y = Math.round(particlesProps[idxPropsRaw++]);
-            idxPropsRaw += 4;
-            if (x < 0 || x >= CANVAS_WIDTH || y < 0 || y >= CANVAS_HEIGHT) {
-                //TODO: i see some particles have negative coords....
-                idxColorRaw += NUM_COLORS_PER_PARTICLE;
+        for (var idxPropsRaw = 0|0, idxColorRaw = 0|0; idxPropsRaw < lenPropsRaw;) {
+            var x = (particlesProps[idxPropsRaw++])|0;
+            var y = (particlesProps[idxPropsRaw])|0;
+            idxPropsRaw += 5|0;
+            if (x < 0|0 || x >= CANVAS_WIDTH|0 || y < 0|0 || y >= CANVAS_HEIGHT|0) {
+                idxColorRaw += NUM_COLORS_PER_PARTICLE|0;
                 continue;
             }
-            var idxOutBufferRaw = (CANVAS_WIDTH * y + x) << 2;
-            outData[idxOutBufferRaw++] = particlesColors[idxColorRaw++];
-            outData[idxOutBufferRaw++] = particlesColors[idxColorRaw++];
-            outData[idxOutBufferRaw++] = particlesColors[idxColorRaw++];
-            outData[idxOutBufferRaw] = particlesColors[idxColorRaw++];
+            var idxOutBufferRaw = ((CANVAS_WIDTH|0) * y + x) << 2|0;
+            outData[idxOutBufferRaw++] = particlesColors[idxColorRaw++]|0;
+            outData[idxOutBufferRaw++] = particlesColors[idxColorRaw++]|0;
+            outData[idxOutBufferRaw++] = particlesColors[idxColorRaw++]|0;
+            outData[idxOutBufferRaw] = particlesColors[idxColorRaw++]|0;
         }
     };
 }
