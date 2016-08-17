@@ -33,7 +33,7 @@ function FlyingText(text, start_x, start_y, start_vx, start_vy) {
         if (!width) {
             width = ctx.measureText(text).width;
         }
-        ctx.font = "bold 84px sans-serif";
+        ctx.font = "bold 54px sans-serif";
         ctx.lineWidth = 2;
         ctx.fillStyle = "red";
         //ctx.fillText(text, x, y);

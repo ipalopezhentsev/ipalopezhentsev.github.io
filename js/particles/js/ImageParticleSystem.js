@@ -26,7 +26,7 @@ function ImageParticleSystem() {
     this.generateParticles = function (filename, brightnessThreshold,
                                        source_origin_x, source_origin_y,
                                        target_origin_x, target_origin_y,
-                                       scale_src) {
+                                       scale_src, vvx, vvy) {
         var tmpCanvas = document.createElement("canvas");
         var tmpImg = document.createElement("img");
         var parseImgData = function () {
@@ -62,8 +62,8 @@ function ImageParticleSystem() {
                     x += source_origin_x;
                     y += source_origin_y;
                     var dist = Math.sqrt(Math.pow(orig_x - x, 2) + Math.pow(orig_y - y, 2));
-                    var vx = 100 * (orig_x - x) / dist;
-                    var vy = 100 * (orig_y - y) / dist;
+                    var vx = vvx * (orig_x - x) / dist;
+                    var vy = vvy * (orig_y - y) / dist;
                     particles.push(x, y, vx, vy, orig_x, orig_y, r, g, b, a);
                 }
             }

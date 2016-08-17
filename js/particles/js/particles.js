@@ -13,6 +13,7 @@ var particles_image2;
 var particles_image3;
 var particles_text;
 var flyingText;
+var background_image = new Image("images/dark-background-design-wallpaper-2.jpg", 0.3);
 
 window.addEventListener("load", setupDrawing);
 var canvas;
@@ -51,19 +52,23 @@ function setupDrawing() {
     particles_background.generateParticles_random(NUM_RANDOM_PARTICLES);
 
     particles_image = new ImageParticleSystem();
-    particles_image.generateParticles("images/rose4_mirrored.png", 150, 0, 0, 400, 150, 1.0);
+    //particles_image.generateParticles("images/rose4_mirrored.png", 150, 0, 0, 400, 150, 1.0);
+    //particles_image.generateParticles("images/10453_HD-colorful-flowers-bouquet-on-the-black-background.jpg", 100, 0, 0, 200, 150, .5);
+    particles_image.generateParticles("images/Roses_Red_Black_483561.jpg", 40, 0, 0, -50, -100, 0.7, +80, +80);
+
 
     //particles_image2 = new ImageParticleSystem();
     //particles_image2.generateParticles("images/rose4.png", 50, CANVAS_WIDTH * 2, 0, 0, 150, .5);
 
     particles_image3 = new ImageParticleSystem();
-    particles_image3.generateParticles("images/test string.png", 50, CANVAS_WIDTH*1.5, CANVAS_HEIGHT * 2, 50, 0, 1.0);
+    //particles_image3.generateParticles("images/test string.png", 50, CANVAS_WIDTH*1.5, CANVAS_HEIGHT * 2, 50, 0, 1.0, +70, +70);
+    particles_image3.generateParticles("images/coollogo_com-221734835.png", 80, CANVAS_WIDTH*1.5, CANVAS_HEIGHT * 2, 45, 30, 1.0, +70, +70);
 
-    particles_text = new TextParticleSystem();
-    particles_text.generateParticles("МАМА И ПАПА");
+    //particles_text = new TextParticleSystem();
+    //particles_text.generateParticles("МАМА И ПАПА");
 
     //flyingText = new FlyingText("С днём рождения, Настя!!!", 0.0, 100.0, 150.0, 150.0);
-    flyingText = new FlyingText("one\ntwo\n", 600.0, 0.0, -150.0, 150.0);
+    flyingText = new FlyingText("НАСТЯ!", 600.0, 0.0, -150.0, 150.0);
 
     timerId = setInterval(drawFrameWithFps, 0);
 }
@@ -113,6 +118,7 @@ function clearBuffer(backBuffer, r, g, b, a) {
 function drawFrame(dt) {
     //clearBuffer(backBuffer, 0|0, 0|0, 0|0, 255|0);
     clearBuffer_slow(backBuffer, 0 | 0, 0 | 0, 0 | 0, 255 | 0);
+    background_image.draw(ctx);
 
     if (dt < MAX_DT) {
         particles_background.updateParticles(dt);
