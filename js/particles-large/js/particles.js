@@ -79,8 +79,8 @@ function drawFrameWithFps() {
 
     drawFrame(dt);
 
-    var fps = Math.round(1.0 / dt);
-    drawFps(fps);
+    //var fps = Math.round(1.0 / dt);
+    //drawFps(fps);
     prevFrameStart = frameStart;
 }
 
