@@ -12,7 +12,7 @@ What was so foolish that would slow down database reading this way?
 
 *It was CLOB's reading*.
 
-Let me explain. One table I'm reading from stores values in so-called [Entity-Attribute-Value model](http://en.wikipedia.org/wiki/Entity–attribute–value_model). That is, instead of storing properties of one entity as type-safe columns inside one row in database table, you instead break down that information to several rows, each row having 'name of column', 'type of column' and 'value of column' columns. It is a common pattern and has its pros and cons which we are not interested in right now - I did not have control over database schema.
+Let me explain. One table I'm reading from stores values in so-called [Entity-Attribute-Value model](https://en.wikipedia.org/wiki/Entity–attribute–value_model). That is, instead of storing properties of one entity as type-safe columns inside one row in database table, you instead break down that information to several rows, each row having 'name of column', 'type of column' and 'value of column' columns. It is a common pattern and has its pros and cons which we are not interested in right now - I did not have control over database schema.
 
 'Normal' storage (Param1 is NUMERIC, Param2 is VARCHAR):
 

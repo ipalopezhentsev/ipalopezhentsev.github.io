@@ -119,12 +119,12 @@ This gives better data locality (more chance for the data to get to CPU cache) a
 
 ## Can Java have non-jagged arrays?
 
-Yes, fortunately there are 3rd party libraries like [Colt](http://acs.lbl.gov/ACSSoftware/colt/api/cern/colt/matrix/package-summary.html#Overview) that provide abstractions for Double and Object based matrices that are stored as one continuous block in memory and addressed as (i*width+j) approach. So if you don't want bothering with transposed matrices as described above, just add Colt dependency to your app.
+Yes, fortunately there are 3rd party libraries like [Colt](https://dst.lbl.gov/ACSSoftware/colt/api/cern/colt/matrix/package-summary.html#Overview) that provide abstractions for Double and Object based matrices that are stored as one continuous block in memory and addressed as (i*width+j) approach. So if you don't want bothering with transposed matrices as described above, just add Colt dependency to your app.
 
 But if you plan to use matrices seriously, consider reading this useful [performance benchmark of different Java matrix libraries](https://code.google.com/p/java-matrix-benchmark/wiki/RuntimeCorei7v2600_2013_10), Colt is not necessarily the fastest of them.
 
 ## Summary
 
 * If you have to store multidimensional matrices in Java, study their typical number of rows and columns. If number of rows is significantly higher than number of columns, store the matrices in transposed form and access it with reverse order of indices. That would allow to save memory significantly.
-* Alternatively, there is [Colt](http://acs.lbl.gov/ACSSoftware/colt/api/cern/colt/matrix/package-summary.html#Overview) library for storing multidimensional matrices continuously. Others are available too.
+* Alternatively, there is [Colt](https://dst.lbl.gov/ACSSoftware/colt/api/cern/colt/matrix/package-summary.html#Overview) library for storing multidimensional matrices continuously. Others are available too.
 * C# is more effective for multidimensional arrays than pure Java and in places is better suited for COM interop as both are Microsoft technologies and existing Java interop libraries have deficiencies (see bugs in COM4J tracker)
