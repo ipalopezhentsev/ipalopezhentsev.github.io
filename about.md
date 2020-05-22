@@ -4,16 +4,15 @@ title: About
 permalink: /about/
 order: 10
 ---
-Welcome to my blog! My name is Ilya Palopezhentsev and I am a software developer in the Moscow office of [Deutsche Bank](http://db.com).
+Welcome to my blog! My name is Ilya Palopezhentsev and I am a software developer in the Moscow office of [Deutsche Bank](http://db.com). I work on automating FX market risk management.
 
 ### My interests are:
 * Java
 * Kotlin
 * Server side development
-* Functional programming
+* Modern programming techniques & libraries. 
 * Performance optimization
 * Automated tests
-* Modern programming techniques & libraries. 
 
 I will be using this blog for sharing interesting stuff I've come across, as long as it fits categories above.
 
