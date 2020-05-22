@@ -1,5 +1,5 @@
 # Dependencies
-markdown:         redcarpet
+markdown:         kramdown
 redcarpet:
   extensions: 	  ["no_intra_emphasis", "lax_spacing", "autolink", "tables", "with_toc_data"]
 highlighter:      pygments
@@ -10,8 +10,7 @@ permalink:        pretty
 # Setup
 title:            Java and C# Programming musings
 tagline:          Ilya Palopezhentsev
-#url:              http://ipalopezhentsev.github.io
-url:              http://ipalopezhentsev.github.io
+url:              https://ipalopezhentsev.github.io
 paginate:         10
 baseurl:          /
 author:
