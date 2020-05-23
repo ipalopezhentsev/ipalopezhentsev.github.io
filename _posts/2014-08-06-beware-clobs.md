@@ -26,15 +26,16 @@ Entity-attribute-storage, classic variant, content is equivalent to table above:
 :---:|-----------|-----------|------------
   1  | "Param1"  | "INTEGER" |   "123"
   1  | "Param2"  | "STRING"  |   "Test"
+
 Here, Value column has VARCHAR type in Oracle and client has to use info in ParamType column to understand how to parse this value. Primary key in this case becomes (ID, ParamName).
 
 I had to work with modification of such storage approach, when there were several Value columns, each having its own type in Oracle. Supposedly, people creating it wanted to introduce more type safety. Note there is also CLOB type column.
 
   ID | ParamName | Type      | IntValue | StringValue | *CLOBValue*
 :---:|-----------|-----------|----------|-------------|-------------
-  1  | "Param1"  | "INTEGER" |   123	  | NULL	  	  | NULL
-  1  | "Param2"  | "STRING"  |   NULL   | "Test"	    | NULL
-  1  | "Param3"  | "CLOB"    |   NULL	  | NULL 		    | "Long CLOB field"
+  1  | "Param1"  | "INTEGER" |   123	| NULL	  	  | NULL
+  1  | "Param2"  | "STRING"  |   NULL   | "Test"	  | NULL
+  1  | "Param3"  | "CLOB"    |   NULL	| NULL 		  | "Long CLOB field"
 
 I had to write JDBC code that reads info from that table. I decided to condense all that value fields into one string field on the SQL side in order to save on network transfer volume. As I had Type column, I would have all the info on client to parse string value. As common denominator in this example is CLOB column, I decided to convert everything to CLOB before sending to client. I realised it would bring some non-optimality like 10-20% but I definitely did not expect it to be _120x_!
 
@@ -42,14 +43,14 @@ Here's the SQL query I was using:
 
 ```sql
 SELECT  ID, ParamName, Type,
-		CASE
-			WHEN Type='INTEGER'
-				THEN TO_CLOB(CAST(IntValue AS VARCHAR))
-			WHEN Type='STRING'
-				THEN TO_CLOB(StringValue)
-			WHEN Type='CLOB'
-				THEN CLOBValue
-		END AS Value
+    CASE
+        WHEN Type='INTEGER'
+            THEN TO_CLOB(CAST(IntValue AS VARCHAR))
+        WHEN Type='STRING'
+            THEN TO_CLOB(StringValue)
+        WHEN Type='CLOB'
+            THEN CLOBValue
+    END AS Value
 FROM TABLE t
 ```
 Then JDBC code was reading CLOBValue from result set, turning it to string and parsing according to Type column.
@@ -58,19 +59,19 @@ It was abysmally slow. It seems CLOB values are very heavyweight and should real
 
 ```sql
 SELECT  ID, ParamName, Type,
-		CASE
-			WHEN Type='INTEGER'
-				THEN CAST(IntValue AS VARCHAR)
-			WHEN Type='STRING'
-				THEN StringValue
-			WHEN Type='CLOB'
-				THEN NULL
-		END AS StringValue,
-		CASE
-			WHEN Type='CLOB'
-				THEN CLOBValue
-			ELSE NULL
-		END AS CLOBValue,
+    CASE
+        WHEN Type='INTEGER'
+            THEN CAST(IntValue AS VARCHAR)
+        WHEN Type='STRING'
+            THEN StringValue
+        WHEN Type='CLOB'
+            THEN NULL
+    END AS StringValue,
+    CASE
+        WHEN Type='CLOB'
+            THEN CLOBValue
+        ELSE NULL
+    END AS CLOBValue,
 FROM TABLE t
 ```
 So Java code would have to read Type column and then either read from StringValue or from CLOBValue column. This allowed to hide rare cases of CLOBs and improve overall reading speed by 120 times.

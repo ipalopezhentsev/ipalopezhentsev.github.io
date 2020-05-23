@@ -100,7 +100,7 @@ The more non-square your matrix is, the higher the ratio will be. Note this does
 
 In C# there are two types of multidimensional arrays:
 
-```C#
+```csharp
 const int nRows = 1000;
 const int nCols = 1000;
 
