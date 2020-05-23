@@ -20,8 +20,6 @@
 
 # Dependencies
 markdown:         kramdown
-#redcarpet:
-#  extensions: 	  ["no_intra_emphasis", "lax_spacing", "autolink", "tables", "with_toc_data"]
 highlighter:      rouge
 
 # Permalinks
@@ -43,9 +41,6 @@ google_analytics_id: UA-53591583-1
 github_username:  ipalopezhentsev
 github:
   repo:           https://github.com/ipalopezhentsev
-
-pages_list:       
-  About: '/about'
 
 plugins:
 - jekyll-feed

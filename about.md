@@ -16,4 +16,8 @@ Welcome to my blog! My name is Ilya Palopezhentsev and I am a software developer
 
 I will be using this blog for sharing interesting stuff I've come across, as long as it fits categories above.
 
+
+One of my hobbies is photography, I write about it at [separate blog](https://ipalopezhentsev.github.io/photo)
+
+
 Thanks for reading!
